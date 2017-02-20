@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use frontend\controllers\base\BaseController;
+use frontend\models\personMsgForm;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -93,7 +94,7 @@ class SiteController extends BaseController
         //app端请求
         if (Yii::$app->request->post("from")=='app'){
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                return json_encode(['status'=>'success']);
+                return json_encode(['status'=>'success','user_id'=>$model->user_id]);
             }
             else return json_encode(['status'=>'fail']);
         }
@@ -227,5 +228,15 @@ class SiteController extends BaseController
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionUpdatePersonMsg(){
+        if (Yii::$app->request->post('from')=='app'){
+            $model=new personMsgForm();
+            if($model->updatePersonMsg()){
+                return json_encode(['status'=>'success']);
+            }
+            return json_encode(['status'=>'fail']);
+        }
     }
 }
