@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\base\BaseModel;
 use Yii;
 
 /**
@@ -13,9 +14,14 @@ use Yii;
  * @property integer $grade
  * @property string $major
  * @property string $avatar
+ * @property integer $created_at
+ * @property integer $updated_at
  */
-class PersonMsgModel extends \yii\db\ActiveRecord
+class PersonMsgModel extends BaseModel
 {
+
+    const SCENARIO_CREATE='create';
+    const SCENARIO_UPDATE='update';
     /**
      * @inheritdoc
      */
@@ -23,7 +29,17 @@ class PersonMsgModel extends \yii\db\ActiveRecord
     {
         return 'person_msg';
     }
-
+    /**
+     * 场景
+     */
+    public function scenarios()
+    {
+        $scenarios = [
+            self::SCENARIO_CREATE => ['id','user_id','username','grade','major','avatar'],
+            self::SCENARIO_UPDATE => ['username','grade','avatar','major'],
+        ];
+        return array_merge(parent::scenarios(), $scenarios);
+    }
     /**
      * @inheritdoc
      */
@@ -31,7 +47,7 @@ class PersonMsgModel extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'username'], 'required'],
-            [['user_id', 'grade'], 'integer'],
+            [['user_id', 'grade', 'created_at', 'updated_at'], 'integer'],
             [['username', 'avatar'], 'string', 'max' => 255],
             [['major'], 'string', 'max' => 32],
         ];
@@ -49,6 +65,8 @@ class PersonMsgModel extends \yii\db\ActiveRecord
             'grade' => Yii::t('app', 'Grade'),
             'major' => Yii::t('app', 'Major'),
             'avatar' => Yii::t('app', 'Avatar'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 }

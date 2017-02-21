@@ -14,14 +14,18 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
-CREATE TABLE `person_Meg` (
+CREATE TABLE `person_msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `user_id` int(11) NOT NULL  COMMENT '用户ID',
   `username` varchar(255) NOT NULL COMMENT '用户名',
   `grade` smallint(10) default NULL  COMMENT '入学年份',
   `major` varchar(32)   DEFAULT NULL COMMENT '专业',
   `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `created_at` int(11) DEFAULT NULL COMMENT '创建时间',
+  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';
+
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -96,7 +100,7 @@ CREATE TABLE `relation_post_tags` (
 
 
 
-
+alter table person_msg add column   `updated_at` int(11) DEFAULT NULL COMMENT '更新时间';
 
 
 
@@ -111,3 +115,4 @@ select*from activity;
 select *from cats;
 select *from user;
 select *from admin;
+select *from person_msg;

@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\PersonMsgModel;
 use frontend\controllers\base\BaseController;
 use frontend\models\personMsgForm;
 use Yii;
@@ -230,13 +231,24 @@ class SiteController extends BaseController
         ]);
     }
 
+    /**
+     * 创建/更新个人信息
+     * @return string
+     */
     public function actionUpdatePersonMsg(){
+        $model=new personMsgForm();
         if (Yii::$app->request->post('from')=='app'){
-            $model=new personMsgForm();
+
             if($model->updatePersonMsg()){
                 return json_encode(['status'=>'success']);
             }
-            return json_encode(['status'=>'fail']);
+            return json_encode(['status'=>'fail','msg'=>$model->_lastError]);
         }
     }
+
+    public function selectPersonalMsg(){
+        $user_id=Yii::$app->request->post('user_id');
+        $data=PersonMsgModel::find()->where(['user_id'=>$user_id])->asArray()->all();
+    }
+
 }
