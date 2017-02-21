@@ -88,6 +88,8 @@ class SiteController extends BaseController
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
+            if (Yii::$app->request->post("from")=='app')
+                return json_encode(['status'=>'success','msg'=>'already login']);
             return $this->goHome();
         }
 

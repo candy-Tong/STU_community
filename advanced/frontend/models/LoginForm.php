@@ -10,10 +10,12 @@ use common\models\UserModel;
  */
 class LoginForm extends Model
 {
+    public $user;
     public $user_id;
     public $username;
     public $password;
     public $rememberMe = true;
+    public $_lastError;
 
     private $_user;
 
@@ -57,7 +59,11 @@ class LoginForm extends Model
      */
     public function login()
     {
-        $this->user_id=$this->getUser()->getId();
+        $this->user=$this->getUser();
+        if(isset($this->user)){
+            $this->user_id=$this->user->getId();
+        }
+
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {

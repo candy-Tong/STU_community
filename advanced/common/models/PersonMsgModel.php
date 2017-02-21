@@ -36,18 +36,19 @@ class PersonMsgModel extends BaseModel
     {
         $scenarios = [
             self::SCENARIO_CREATE => ['id','user_id','username','grade','major','avatar'],
-            self::SCENARIO_UPDATE => ['username','grade','avatar','major'],
+            self::SCENARIO_UPDATE => ['username','avatar'],
         ];
         return array_merge(parent::scenarios(), $scenarios);
     }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['user_id', 'username'], 'required'],
             [['user_id', 'grade', 'created_at', 'updated_at'], 'integer'],
+            ['user_id','required'],
             [['username', 'avatar'], 'string', 'max' => 255],
             [['major'], 'string', 'max' => 32],
         ];

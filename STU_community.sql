@@ -64,6 +64,17 @@ CREATE TABLE `activity` (
   `content` text COMMENT '内容',
   `time` int(11) NOT NULL COMMENT '活动时间',
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='活动表';
+
+CREATE TABLE `help` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `post_id` int(11) NOT NULL COMMENT '帖子ID',
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `summary` varchar(255) DEFAULT NULL COMMENT '摘要',
+  `content` text COMMENT '内容',
+  `phone` varchar(32) DEFAULT NULL COMMENT '摘要',
+  `time` int(11) NOT NULL COMMENT '活动时间',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='文章主表';
 
 
@@ -100,8 +111,6 @@ CREATE TABLE `relation_post_tags` (
 
 
 
-alter table person_msg add column   `updated_at` int(11) DEFAULT NULL COMMENT '更新时间';
-
 
 
 
@@ -116,3 +125,4 @@ select *from cats;
 select *from user;
 select *from admin;
 select *from person_msg;
+delete from person_msg where id=5;

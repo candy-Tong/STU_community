@@ -53,14 +53,11 @@ class personMsgForm extends Model
             $this->_lastError='validate is not pass';
             return false;
         }
-        //检查是否有user_id
-        if(isset($_POST['data']['user_id'])) {
-            $user_id = $_POST['data']['user_id'];
-        }else{
-            $this->_lastError='no user_id';
-            return false;
-        }
-        $model=PersonMsgModel::findOne(['user_id'=>$user_id]);
+        //获取 user_id
+        if(!isset($this->user_id))
+            $this->user_id = $_POST['data']['user_id'];
+
+        $model=PersonMsgModel::findOne(['user_id'=>$this->user_id]);
         if(!isset($model)){
             $model=new PersonMsgModel();
             $model->scenario=PersonMsgModel::SCENARIO_CREATE;
@@ -69,7 +66,7 @@ class personMsgForm extends Model
             $model->setScenario(PersonMsgModel::SCENARIO_UPDATE);
         }
         $model->load($_POST,'data');
-
+        $model->user_id=$this->user_id;
         $model->updated_at=time();
 
         if (!$model->save()){
