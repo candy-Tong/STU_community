@@ -9,6 +9,7 @@
 namespace common\models;
 
 
+use frontend\models\HelpForm;
 use yii\base\Exception;
 use yii\base\Model;
 use common\models\PostsModel;
@@ -120,6 +121,8 @@ class PostForm extends Model
                 $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventAddActivity'],$data);
                 break;
             case self::HELP:
+                $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventAddHelp'],$data);
+                break;
             case self::QUESTIONAIRE:
             default:throw new Exception("the postType doesn't exist");
         }
@@ -137,6 +140,16 @@ class PostForm extends Model
         $model=new ActivityForm();
         $model->post_id=$event->data['post_id'];
         $model->saveActivity();
+    }
+
+    /**
+     * 事件方法——新增文章
+     * @param $event
+     */
+    public function _eventAddHelp($event){
+        $model=new HelpForm();
+        $model->post_id=$event->data['post_id'];
+        $model->saveHelp();
     }
 
     /**

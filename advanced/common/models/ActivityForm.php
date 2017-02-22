@@ -34,7 +34,10 @@ class ActivityForm extends Model
         $model->post_id=$this->post_id;
         $model->title=Yii::$app->request->post('title');
         $model->content=Yii::$app->request->post('content');
-        $model->summary=$this->_getSummary($model->content);
+        if(!isset($_POST['summary']))
+            $model->summary=$this->_getSummary($model->content);
+        else
+            $model->summary=Yii::$app->request->post(['summary']);
         $model->time=Yii::$app->request->post('time');
         if(!$model->save())
             throw new Exception('fail to save Activity'.$model->post_id);

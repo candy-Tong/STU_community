@@ -75,4 +75,8 @@ class PostsModel extends BaseModel
     public function getActivity(){
         return $this->hasOne(ActivityModel::className(),['post_id'=>'id']);
     }
+
+    public function getHelp(){
+        return $this->hasMany(ContractModel::className(),['post_id'=>'id']);
+    }
 }
