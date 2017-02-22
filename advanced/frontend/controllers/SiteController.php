@@ -36,7 +36,7 @@ class SiteController extends BaseController
                     [
                         'actions' => ['signup'],
                         'allow' => true,
-                        'roles' => ['?'],
+//                        'roles' => ['*'],
                     ],
                     [
                         'actions' => ['logout'],
@@ -101,6 +101,7 @@ class SiteController extends BaseController
             }
             else return json_encode(['status'=>'fail']);
         }
+        //other
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
@@ -163,6 +164,12 @@ class SiteController extends BaseController
      */
     public function actionSignup()
     {
+        if (!Yii::$app->user->isGuest){
+            if(Yii::$app->request->post('from')=='app')
+                return json_encode(['status'=>'fail','msg'=>'already login']);
+            else
+                $this->goBack();
+        }
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -248,9 +255,12 @@ class SiteController extends BaseController
         }
     }
 
-    public function selectPersonalMsg(){
+    public function actionSelectPersonMsg(){
         $user_id=Yii::$app->request->post('user_id');
         $data=PersonMsgModel::find()->where(['user_id'=>$user_id])->asArray()->all();
+        if(isset($data))
+             return json_encode(['status'=>'success','data'=>$data]);
+        return json_encode(['status'=>'fail']);
     }
 
 }
