@@ -90,6 +90,7 @@ class PostForm extends Model
                 throw new Exception('文章保存失败');
 
             $data['post_id']=$model->attributes['id'];
+            $this->appData=['user_id'=>$model->attributes['id']];
             $data['cat']=Yii::$app->request->post("cat");
 
 
@@ -126,7 +127,7 @@ class PostForm extends Model
             case self::QUESTIONAIRE:
             default:throw new Exception("the postType doesn't exist");
         }
-        $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventselectPost'],$data);
+//        $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventselectPost'],$data);
         //触发事件
         $this->trigger(self::EVENT_AFTER_CREATE);
     }
@@ -152,71 +153,32 @@ class PostForm extends Model
         $model->saveHelp();
     }
 
-    /**
-     * 事件方法——查找文章
-     * @param $event
-     * @throws Exception
-     */
-    public function _eventSelectPost($event){
-        switch ($event->data['cat']){
-            case 0:null;break;
-            case 1:$cat='activity';break;
-            case 2:$cat='help';break;
-            case 3:$cat='questionaire';break;
-            default:throw new Exception('wrong cat');
-        }
-        $activity=PostsModel::find()->where(['id'=>$event->data['post_id']])->with('cat',$cat)->asArray()->all();
-        if (!$activity)
-            throw new Exception("fail to select data");
-        $activity=$this->_formalize($activity);
-        $this->appData=$activity;
-    }
-
-
-    public function selectPost(){
+    public function selectPost($curPage,$pageSize,$cat){
         $model=new PostsModel();
-        //设置页数
-        $curPage=!empty(Yii::$app->request->post('curPage'))?Yii::$app->request->post('curPage'):1;
-        //设置每页显示帖子条数
-        $pageSize=!empty(Yii::$app->request->post('pageSize'))?Yii::$app->request->post('pageSize'):10;
-        //设置类型
-        $cat=!empty(Yii::$app->request->post('cat'))?Yii::$app->request->post('cat'):null;
+
         //设置条件
         $condition=[
             'cat_id'=>$cat,
-            'is_valid'=>10,
+            'is_valid'=>10,     //10为有效文章
         ];
-        $select=['created_at','id','label_img','updated_at','user_id'];
+        $select=['created_at','id','label_img','updated_at','user_id','cat_id'];
         //生成sql语句
-        $query=$model->find()->where($condition)->select($select)->with('cat','activity')->orderBy(['id'=>SORT_DESC]);
+        $query=$model->find()->where($condition)->select($select)->orderBy(['id'=>SORT_DESC]);
+        $activityModel=new ActivityForm();
+        $data=$activityModel->_selectActivity($query,$curPage,$pageSize);
 
-        $data['count']=$query->count();
         //检查是否超出最末页
         $data['curPage']=(ceil($data['count']/$pageSize)<$curPage)?ceil($data['count'/$pageSize]):$curPage;
         $data['pageSize']=$pageSize;
         $data['start']=($curPage-1)*$pageSize+1;
         $data['end']=(ceil($data['count']/$pageSize==$curPage))?$data['count']:($curPage-1)*$pageSize+$pageSize;
-        $data['data']=$query
-            ->offset(($curPage-1)*$pageSize)
-            ->limit($pageSize)
-            ->asArray()
-            ->all();
-        $data['data']=$this->_formalize($data['data']);
+
         $this->appData=$data;
         return true;
 
     }
-    private function _formalize($data){
-        foreach ($data as &$post){
-            $post['content']=$post['activity']['content'];
-            $post['summary']=$post['activity']['summary'];
-            $post['title']=$post['activity']['title'];
-            $post['time']=$post['activity']['time'];
-            unset($post['activity']);
-            $post['cat_name']=$post['cat']['cat_name'];
-            unset($post['cat']);
-        }
-        return $data;
-    }
+
+
+
 
 }

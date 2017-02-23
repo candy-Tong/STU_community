@@ -56,4 +56,27 @@ class ActivityForm extends Model
             return null;
         return (mb_substr(str_replace('$nbsp;', '', strip_tags($content)), $begin, $end, $char));
     }
+    public function _selectActivity($query,$curPage,$pageSize){
+        $data['count']=$query->count();
+        $data['data']=$query
+            ->with('cat','activity')
+            ->offset(($curPage-1)*$pageSize)
+            ->limit($pageSize)
+            ->asArray()
+            ->all();
+        $data['data']=self::_formalize($data['data']);
+        return $data;
+    }
+    private  function _formalize($data){
+        foreach ($data as &$post){
+            $post['content']=$post['activity']['content'];
+            $post['summary']=$post['activity']['summary'];
+            $post['title']=$post['activity']['title'];
+            $post['time']=$post['activity']['time'];
+            unset($post['activity']);
+            $post['cat_name']=$post['cat']['cat_name'];
+            unset($post['cat']);
+        }
+        return $data;
+    }
 }

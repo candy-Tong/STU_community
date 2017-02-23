@@ -34,7 +34,13 @@ class PostController extends BaseController
         $model=new PostForm();
         //app端请求
         if (Yii::$app->request->post("from") == 'app') {
-            if($model->selectPost())
+            //设置页数
+            $curPage=!empty(Yii::$app->request->post('curPage'))?Yii::$app->request->post('curPage'):1;
+            //设置每页显示帖子条数
+            $pageSize=!empty(Yii::$app->request->post('pageSize'))?Yii::$app->request->post('pageSize'):10;
+            //设置类型
+            $cat=!empty(Yii::$app->request->post('cat'))?Yii::$app->request->post('cat'):null;
+            if($model->selectPost($curPage,$pageSize,$cat))
                 return json_encode(['status'=>'success','data'=>$model->appData]);
             else
                 return json_encode(['status'=>'fail']);

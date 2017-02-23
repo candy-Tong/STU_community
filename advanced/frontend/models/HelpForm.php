@@ -47,12 +47,13 @@ class HelpForm
         if (!empty($_POST['contract'])){
             //读取post过来的数组的信息，key为type，value为content
             $contract=json_decode($_POST['contract']);
+
             foreach ($contract as $type=>$content){
                 $contractModel=new ContractModel();
                 $contractModel->post_id=$this->post_id;
                 $contractModel->type=$type;
-                $contractModel->content->$content;
-                if(!$model->save()){
+                $contractModel->content=$content;
+                if(!$contractModel->save()){
                     throw new Exception('faile to save contract');
                 }
             }

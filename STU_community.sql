@@ -16,7 +16,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `person_msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  `user_id` int(11) NOT NULL  COMMENT '用户ID',
+  `user_id` int(11) default NULL  COMMENT '用户ID',
   `username` varchar(255) NOT NULL COMMENT '用户名',
   `grade` smallint(10) default NULL  COMMENT '入学年份',
   `major` varchar(32)   DEFAULT NULL COMMENT '专业',
@@ -25,6 +25,7 @@ CREATE TABLE `person_msg` (
   `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='会员表';
+
 
 
 CREATE TABLE `admin` (
@@ -72,18 +73,23 @@ CREATE TABLE `help` (
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
   `summary` varchar(255) DEFAULT NULL COMMENT '摘要',
   `content` text COMMENT '内容',
-  `phone` varchar(32) DEFAULT NULL COMMENT '摘要',
-  `time` int(11) NOT NULL COMMENT '活动时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='文章主表';
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='求助主表';
 
+CREATE TABLE `contract` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `post_id` int(11) NOT NULL COMMENT '帖子ID',
+  `type` varchar(255) DEFAULT NULL COMMENT '联系类型',
+  `content` varchar(255) DEFAULT NULL COMMENT '联系内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='求助联系方式表';
 
 
 CREATE TABLE `cats` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `cat_name` varchar(255) DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='分类表'; 
 
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -124,5 +130,6 @@ select*from activity;
 select *from cats;
 select *from user;
 select *from admin;
-select *from person_msg;
-delete from person_msg where id=5;
+select *from person_msg; 
+select *from help;
+select *from contract;
