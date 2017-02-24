@@ -62,4 +62,7 @@ class HelpModel extends BaseModel
             'content' => Yii::t('app', 'Content'),
         ];
     }
+    public function getPost(){
+        return $this->hasOne(PostsModel::className(),['id'=>'post_id']);
+    }
 }

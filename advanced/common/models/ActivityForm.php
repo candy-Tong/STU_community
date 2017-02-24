@@ -56,6 +56,14 @@ class ActivityForm extends Model
             return null;
         return (mb_substr(str_replace('$nbsp;', '', strip_tags($content)), $begin, $end, $char));
     }
+
+    /**
+     * 查询活动
+     * @param $query
+     * @param $curPage
+     * @param $pageSize
+     * @return mixed
+     */
     public function _selectActivity($query,$curPage,$pageSize){
         $data['count']=$query->count();
         $data['data']=$query
@@ -67,7 +75,13 @@ class ActivityForm extends Model
         $data['data']=self::_formalize($data['data']);
         return $data;
     }
-    private  function _formalize($data){
+
+    /**
+     * 格式化数据
+     * @param $data
+     * @return mixed
+     */
+    public static function _formalize($data){
         foreach ($data as &$post){
             $post['content']=$post['activity']['content'];
             $post['summary']=$post['activity']['summary'];

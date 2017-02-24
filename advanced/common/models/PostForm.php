@@ -164,20 +164,48 @@ class PostForm extends Model
         $select=['created_at','id','label_img','updated_at','user_id','cat_id'];
         //生成sql语句
         $query=$model->find()->where($condition)->select($select)->orderBy(['id'=>SORT_DESC]);
-        $activityModel=new ActivityForm();
-        $data=$activityModel->_selectActivity($query,$curPage,$pageSize);
 
+        $data['count']=$query->count();
+        switch ($cat){
+            case self::ACTIVITY:
+                $query=$query->with('cat','activity');
+                break;
+            case self::HELP:
+                $query=$query->with('cat','help','contract');
+                break;
+            case self::QUESTIONAIRE:
+                $query=$query->with('cat','questionaire');
+            default:
+        }
+        //检查curPage是否合法
+        $curPage=(ceil($data['count']/$pageSize)<$curPage)?ceil($data['count']/$pageSize):$curPage; 
+        $data['data']=$query
+            ->offset(($curPage-1)*$pageSize)
+            ->limit($pageSize)
+            ->asArray()
+            ->all();
+        switch ($cat){
+            case self::ACTIVITY:
+                $data['data']=ActivityForm::_formalize($data['data']);
+                break;
+            case self::HELP:
+                $data['data']=HelpForm::_formalize($data['data']);
+                break;
+            case self::QUESTIONAIRE:
+                $cat_name='questionaire';
+                break;
+            default:
+        }
         //检查是否超出最末页
-        $data['curPage']=(ceil($data['count']/$pageSize)<$curPage)?ceil($data['count'/$pageSize]):$curPage;
+        $data['curPage']=$curPage;
         $data['pageSize']=$pageSize;
         $data['start']=($curPage-1)*$pageSize+1;
-        $data['end']=(ceil($data['count']/$pageSize==$curPage))?$data['count']:($curPage-1)*$pageSize+$pageSize;
+        $data['end']=(ceil($data['count']/$pageSize)==$curPage)?$data['count']:($curPage-1)*$pageSize+$pageSize;
 
         $this->appData=$data;
         return true;
 
     }
-
 
 
 

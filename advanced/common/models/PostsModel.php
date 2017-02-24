@@ -77,6 +77,9 @@ class PostsModel extends BaseModel
     }
 
     public function getHelp(){
+        return $this->hasOne(HelpModel::className(),['post_id'=>'id']);
+    }
+    public function getContract(){
         return $this->hasMany(ContractModel::className(),['post_id'=>'id']);
     }
 }

@@ -8,6 +8,7 @@
 
 namespace frontend\models;
 
+use common\models\ActivityForm;
 use common\models\ContractModel;
 use yii;
 use yii\base\Exception;
@@ -72,6 +73,23 @@ class HelpForm
         if (empty($content))
             return null;
         return (mb_substr(str_replace('$nbsp;', '', strip_tags($content)), $begin, $end, $char));
+    }
+
+    public static function _formalize($data){
+        foreach ($data as &$post){
+            $post['content']=$post['help']['content'];
+            $post['summary']=$post['help']['summary'];
+            $post['title']=$post['help']['title'];
+
+            unset($post['help']);
+            foreach($post['contract'] as &$contract){
+                unset($contract['id']);
+                unset($contract['post_id']);
+            }
+            $post['cat_name']=$post['cat']['cat_name'];
+            unset($post['cat']);
+        }
+        return $data;
     }
 }
 
