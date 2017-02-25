@@ -18,8 +18,8 @@
       <file leaf-file-name="PostController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/PostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+            <state relative-caret-position="1208">
+              <caret line="70" column="53" lean-forward="false" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -28,8 +28,8 @@
       <file leaf-file-name="PostForm.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/advanced/common/models/PostForm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="180" column="100" lean-forward="false" selection-start-line="180" selection-start-column="100" selection-end-line="180" selection-end-column="100" />
+            <state relative-caret-position="914">
+              <caret line="238" column="67" lean-forward="true" selection-start-line="238" selection-start-column="67" selection-end-line="238" selection-end-column="67" />
               <folding>
                 <element signature="e#119#148#0#PHP" expanded="true" />
               </folding>
@@ -37,45 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostsModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/advanced/common/models/PostsModel.php">
+      <file leaf-file-name="ActiveRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/advanced/vendor/yiisoft/yii2/db/ActiveRecord.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="68" column="28" lean-forward="false" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/advanced/common/models/ActivityForm.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="83" column="27" lean-forward="false" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
-              <folding>
-                <element signature="e#119#142#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelpForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/advanced/frontend/models/HelpForm.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-              <folding>
-                <element signature="e#120#151#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelpModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/advanced/common/models/HelpModel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+            <state relative-caret-position="253">
+              <caret line="609" column="20" lean-forward="false" selection-start-line="609" selection-start-column="20" selection-end-line="609" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -132,12 +98,12 @@
         <option value="$PROJECT_DIR$/advanced/common/models/PersonMsgModel.php" />
         <option value="$PROJECT_DIR$/advanced/frontend/models/personMsgForm.php" />
         <option value="$PROJECT_DIR$/advanced/frontend/controllers/SiteController.php" />
-        <option value="$PROJECT_DIR$/advanced/frontend/controllers/PostController.php" />
         <option value="$PROJECT_DIR$/advanced/common/models/ActivityForm.php" />
         <option value="$PROJECT_DIR$/advanced/common/models/ContractModel.php" />
         <option value="$PROJECT_DIR$/advanced/common/models/HelpModel.php" />
         <option value="$PROJECT_DIR$/advanced/common/models/PostsModel.php" />
         <option value="$PROJECT_DIR$/advanced/frontend/models/HelpForm.php" />
+        <option value="$PROJECT_DIR$/advanced/frontend/controllers/PostController.php" />
         <option value="$PROJECT_DIR$/advanced/common/models/PostForm.php" />
       </list>
     </option>
@@ -170,6 +136,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -300,7 +267,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -395,11 +361,12 @@
       <workItem from="1487742157958" duration="13245000" />
       <workItem from="1487838287121" duration="5831000" />
       <workItem from="1487920700181" duration="7069000" />
+      <workItem from="1488004251585" duration="3541000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99487000" />
+    <option name="totallyTimeSpent" value="103028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
@@ -460,16 +427,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/advanced/common/models/ActivityForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-          <folding>
-            <element signature="e#119#142#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/SiteController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3570">
@@ -700,14 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/advanced/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/advanced/frontend/tests/functional/LoginCest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1114">
@@ -726,9 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1012">
           <caret line="91" column="35" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="35" />
-          <folding>
-            <element signature="e#34#67#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -798,14 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/PostController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/advanced/common/models/ContractModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="652">
@@ -816,7 +754,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/advanced/common/models/HelpModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
+        <state relative-caret-position="2730">
           <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
           <folding />
         </state>
@@ -832,7 +770,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/advanced/common/models/ActivityForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="3192">
           <caret line="83" column="27" lean-forward="false" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
           <folding>
             <element signature="e#119#142#0#PHP" expanded="true" />
@@ -840,28 +778,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/advanced/common/models/PostsModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="68" column="28" lean-forward="false" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/advanced/frontend/models/HelpForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+        <state relative-caret-position="3570">
+          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="e#120#151#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/advanced/common/models/PostsModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="68" column="28" lean-forward="false" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/advanced/vendor/yiisoft/yii2/db/ActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="609" column="20" lean-forward="false" selection-start-line="609" selection-start-column="20" selection-end-line="609" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/advanced/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="113" column="27" lean-forward="false" selection-start-line="113" selection-start-column="27" selection-end-line="113" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/advanced/frontend/controllers/PostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1208">
+          <caret line="70" column="53" lean-forward="false" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/advanced/common/models/PostForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="180" column="100" lean-forward="false" selection-start-line="180" selection-start-column="100" selection-end-line="180" selection-end-column="100" />
+        <state relative-caret-position="914">
+          <caret line="238" column="67" lean-forward="true" selection-start-line="238" selection-start-column="67" selection-end-line="238" selection-end-column="67" />
           <folding>
             <element signature="e#119#148#0#PHP" expanded="true" />
           </folding>

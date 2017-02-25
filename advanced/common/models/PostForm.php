@@ -178,7 +178,7 @@ class PostForm extends Model
             default:
         }
         //检查curPage是否合法
-        $curPage=(ceil($data['count']/$pageSize)<$curPage)?ceil($data['count']/$pageSize):$curPage; 
+        $curPage=(ceil($data['count']/$pageSize)<$curPage)?ceil($data['count']/$pageSize):$curPage;
         $data['data']=$query
             ->offset(($curPage-1)*$pageSize)
             ->limit($pageSize)
@@ -207,6 +207,57 @@ class PostForm extends Model
 
     }
 
+    public function deletePost(){
 
+
+
+        //事务
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $id=$_POST['post_id'];
+            if (!isset($id)){
+                throw new Exception('no post_id');
+            }
+            $model=PostsModel::findOne($id);
+            if(!isset($model))
+                throw new Exception('can\'t find the post');
+            $cat=$model->attributes['cat_id'];
+            if($model->delete()==false)
+                throw new Exception("fail to delete");
+            switch ($cat){
+                case self::ACTIVITY:
+                    $activityModel=ActivityModel::findOne(['post_id'=>$id]);
+                    if (!isset($activityModel))
+                        throw new Exception('can\'t find the activity');
+                    if ($activityModel->delete()==false)
+                        throw new Exception('fail to delete activity');
+
+                    break;
+                case self::HELP:
+                    $helpModel=HelpModel::findOne(['post_id'=>$id]);
+                    if(!$helpModel->delete())
+                        throw new Exception('fail to delete help');
+                    $contractModel=ContractModel::findAll(['post_id'=>$id]);
+                    foreach ($contractModel as $item){
+                        if($item->delete()==false)
+                            throw new Exception('fail to delete contract');
+                    }
+                    break;
+                case self::QUESTIONAIRE:
+                    break;
+                default:throw new Exception('can\'t find the cat');
+            }
+
+
+            $transaction->commit();
+
+
+            return true;
+        } catch (Exception $e) {
+            $transaction->rollBack();
+            $this->_lastError = $e->getMessage();
+            return false;
+        }
+    }
 
 }

@@ -65,4 +65,13 @@ class PostController extends BaseController
         }
         return json_encode(['status' => 'fail']);
     }
+
+    public function actionDelete(){
+        $model=new PostForm();
+        if (Yii::$app->request->post("from") == 'app') {
+            if($model->deletePost())
+                return json_encode(['status'=>'success']);
+            return json_encode(['status'=>'fail','msg'=>$model->_lastError]);
+        }
+    }
 }
