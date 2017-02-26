@@ -66,6 +66,10 @@ class PostController extends BaseController
         return json_encode(['status' => 'fail']);
     }
 
+    /**
+     * 删除帖子
+     * @return string
+     */
     public function actionDelete(){
         $model=new PostForm();
         if (Yii::$app->request->post("from") == 'app') {
@@ -74,4 +78,5 @@ class PostController extends BaseController
             return json_encode(['status'=>'fail','msg'=>$model->_lastError]);
         }
     }
+
 }

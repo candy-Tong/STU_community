@@ -10,6 +10,7 @@ namespace common\models;
 
 
 use frontend\models\HelpForm;
+use frontend\models\QuestionaireForm;
 use yii\base\Exception;
 use yii\base\Model;
 use common\models\PostsModel;
@@ -125,6 +126,8 @@ class PostForm extends Model
                 $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventAddHelp'],$data);
                 break;
             case self::QUESTIONAIRE:
+                $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventAddQuestionaire'],$data);
+                break;
             default:throw new Exception("the postType doesn't exist");
         }
 //        $this->on(self::EVENT_AFTER_CREATE, [$this, '_eventselectPost'],$data);
@@ -152,6 +155,19 @@ class PostForm extends Model
         $model->post_id=$event->data['post_id'];
         $model->saveHelp();
     }
+
+    /**
+     * 事件方法——新增问卷
+     * @param $event
+     */
+    public function _eventAddQuestionaire($event){
+        $model=new QuestionaireForm();
+        $model->post_id=$event->data['post_id'];
+        $model->scenario=QuestionaireForm::SCENARIO_CREATE;
+        $model->load(Yii::$app->request->post());
+        $model->saveQuestionaire();
+    }
+
 
     public function selectPost($curPage,$pageSize,$cat){
         $model=new PostsModel();
@@ -208,9 +224,6 @@ class PostForm extends Model
     }
 
     public function deletePost(){
-
-
-
         //事务
         $transaction = Yii::$app->db->beginTransaction();
         try {
