@@ -15,6 +15,7 @@ use Yii;
  * @property integer $is_valid
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $visable
  */
 class PostsModel extends BaseModel
 {
@@ -34,6 +35,7 @@ class PostsModel extends BaseModel
         return [
             [['cat_id', 'user_id', 'is_valid', 'created_at', 'updated_at'], 'integer'],
             [['label_img'], 'string', 'max' => 255],
+            [['visable'], 'string', 'max' => 32],
         ];
     }
 
@@ -50,6 +52,7 @@ class PostsModel extends BaseModel
             'is_valid' => Yii::t('app', 'Is Valid'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'visable' => Yii::t('app', 'Visable'),
         ];
     }
 

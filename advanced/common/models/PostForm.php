@@ -85,6 +85,14 @@ class PostForm extends Model
 
             $model->cat_id=Yii::$app->request->post("cat");
             $model->user_id = Yii::$app->request->post("user_id");
+            if(!isset($_POST['visableToAll'])||$_POST['visableToAll']==0)
+                $model->visable=null;
+            else{
+                $userModel=PersonMsgModel::findOne(['user_id'=>$model->user_id]);
+                if (!isset($userModel))
+                    throw new Exception('the user is not exist');
+                $model->visable=$userModel->major;
+            }
             $model->created_at = time();
             $model->updated_at = time();
             if (!$model->save())
