@@ -182,7 +182,8 @@ class SiteController extends BaseController
                 }
                 //返回json数据到app
             }else if (Yii::$app->request->post("from")=='app'){
-                return json_encode($model->getErrors());
+                $error=array_merge($model->getErrors(),['status'=>'fail']);
+                return json_encode($error);
             }
         }
 

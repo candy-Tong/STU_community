@@ -9,7 +9,6 @@
 namespace frontend\controllers;
 
 use common\models\PostForm;
-use common\models\PostsModel;
 use Yii;
 use frontend\controllers\base\BaseController;
 
@@ -40,7 +39,8 @@ class PostController extends BaseController
             $pageSize=!empty(Yii::$app->request->post('pageSize'))?Yii::$app->request->post('pageSize'):10;
             //设置类型
             $cat=!empty(Yii::$app->request->post('cat'))?Yii::$app->request->post('cat'):null;
-            if($model->selectPost($curPage,$pageSize,$cat))
+            $visibility=!empty($_POST['visibility'])?$_POST['visibility']:0;
+            if($model->selectPost($curPage,$pageSize,$cat,$visibility))
                 return json_encode(['status'=>'success','data'=>$model->appData]);
             else
                 return json_encode(['status'=>'fail']);

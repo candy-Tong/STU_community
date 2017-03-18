@@ -176,8 +176,14 @@ class PostForm extends Model
         $model->saveQuestionaire();
     }
 
-
-    public function selectPost($curPage,$pageSize,$cat){
+    /**
+     * @param $curPage
+     * @param $pageSize
+     * @param $cat
+     * @param $visibility   可视性，0为显示所有能见的帖子，1为显示校级帖子，2为显示班级内帖子
+     * @return bool
+     */
+    public function selectPost($curPage,$pageSize,$cat,$visibility){
         $model=new PostsModel();
 
         //设置条件
@@ -185,6 +191,7 @@ class PostForm extends Model
             'cat_id'=>$cat,
             'is_valid'=>10,     //10为有效文章
         ];
+
         $select=['created_at','id','label_img','updated_at','user_id','cat_id'];
         //生成sql语句
         $query=$model->find()->where($condition)->select($select)->orderBy(['id'=>SORT_DESC]);
@@ -198,7 +205,7 @@ class PostForm extends Model
                 $query=$query->with('cat','help','contract');
                 break;
             case self::QUESTIONAIRE:
-                $query=$query->with('cat','questionaire');
+                $query=$query->with('cat','questionaire.question.choice');
             default:
         }
         //检查curPage是否合法

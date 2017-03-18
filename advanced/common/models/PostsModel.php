@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\base\BaseModel;
+use frontend\models\QuestionaireForm;
 use Yii;
 
 /**
@@ -84,5 +85,8 @@ class PostsModel extends BaseModel
     }
     public function getContract(){
         return $this->hasMany(ContractModel::className(),['post_id'=>'id']);
+    }
+    public function getQuestionaire(){
+        return $this->hasOne(QuestionaireModel::className(),['post_id'=>'id']);
     }
 }

@@ -50,7 +50,5 @@ class QuestionForm extends Model
             $choiceModel->question_id=$model->attributes['id'];
             $choiceModel->saveChoice();
         }
-
-
     }
 }

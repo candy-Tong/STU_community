@@ -44,4 +44,7 @@ class ChoiceModel extends \yii\db\ActiveRecord
             'choice' => Yii::t('app', 'Choice'),
         ];
     }
+    public function getQuestion(){
+        return $this->hasOne(QuestionModel::className(),['id'=>'question_id']);
+    }
 }

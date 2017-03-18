@@ -46,4 +46,10 @@ class QuestionaireModel extends \yii\db\ActiveRecord
             'summary' => Yii::t('app', 'Summary'),
         ];
     }
+    public function getPost(){
+        return $this->hasOne(PostsModel::className(),['id'=>'post_id']);
+    }
+    public function getQuestion(){
+        return $this->hasMany(QuestionModel::className(),['questionaire_id'=>'id']);
+    }
 }
